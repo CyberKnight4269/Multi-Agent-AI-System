@@ -12,14 +12,14 @@ def classify_input(data, filename):
     if format_type == "Email":
         from email_agent import process_email
         process_email(data,filename,intent)
-    # elif format_type == "JSON":
-    #     from json_agent import process_json
-    #     return process_json(json.loads(data))
+    elif format_type == "JSON":
+        from json_agent import process_json
+        process_json(json.loads(data),filename,intent)
     # elif format_type == "PDF":
     #     from pdf_agent import process_pdf
     #     return process_pdf(data)
-    # else:
-    #     return {"error": "Unsupported format"}
+    else:
+        return {"error": "Unsupported format"}
 
 def detect_format(data, filename):
     if filename.endswith(".json"):

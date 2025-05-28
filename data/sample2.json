@@ -1,0 +1,18 @@
+{
+    "id": "PROD002",
+    "name": "Smart LED Desk Lamp",
+    "type": "Electronic Item",
+    "category": "Home & Office",
+    "price": 29.95,
+    "currency": "USD",
+    "in_stock": false,
+    "features": [
+        "Dimmable",
+        "Color temperature control",
+        "App controlled"
+      ],
+    "manufacturer": {
+        "name": "BrightFuture Innovations",
+        "country": "China"
+    }
+}

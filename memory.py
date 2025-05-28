@@ -32,6 +32,10 @@ class MemoryStore:
             ))
         self.conn.commit()
 
+    def delete_table(self):
+        self.conn.execute('''DROP TABLE logs''')
+        self.conn.commit()
+
     def show(self):
         cursor = self.conn.execute("SELECT * FROM logs ORDER BY timestamp DESC")
         for row in cursor.fetchall():
