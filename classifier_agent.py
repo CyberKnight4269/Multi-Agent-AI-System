@@ -1,13 +1,25 @@
 import os
 from dotenv import load_dotenv
+import fitz
 import json
 from google import genai
 
 load_dotenv()
 
-def classify_input(data, filename):
-    format_type = detect_format(data, filename)
-    intent = detect_intent(data)
+def classify_input(path):
+    filename=path
+    format_type = detect_format(filename)
+    if format_type == "PDF":
+        doc = fitz.open(path)
+        data = "\n".join([page.get_text() for page in doc])
+        doc.close()
+        intent = detect_intent(data)
+        from pdf_agent import process_pdf
+        return process_pdf(data,filename,intent)
+    else:
+        with open(path, "rb") as f:
+            data = f.read()
+        intent = detect_intent(data)
 
     if format_type == "Email":
         from email_agent import process_email
@@ -15,16 +27,13 @@ def classify_input(data, filename):
     elif format_type == "JSON":
         from json_agent import process_json
         process_json(json.loads(data),filename,intent)
-    # elif format_type == "PDF":
-    #     from pdf_agent import process_pdf
-    #     return process_pdf(data)
     else:
-        return {"error": "Unsupported format"}
+        print("error: Unsupported file format")
 
-def detect_format(data, filename):
+def detect_format(filename):
     if filename.endswith(".json"):
         return "JSON"
-    if filename.endswith(".pdf") or b"%PDF" in data:
+    if filename.endswith(".pdf"):
         return "PDF"
     if filename.endswith(".txt"):
         return "Email"
