@@ -11,7 +11,7 @@ def process_pdf(data,filename,intent):
 
     sender = client.models.generate_content(
         model="gemini-2.0-flash",
-        contents=f"Extract just the sender from the text and if there is no sender just say unknown\n {data}",
+        contents=f"Extract just the sender's name from the text and if there is no sender just say unknown\n {data}",
     )
     urgency = client.models.generate_content(
         model="gemini-2.0-flash",

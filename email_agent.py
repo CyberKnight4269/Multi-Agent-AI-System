@@ -10,7 +10,7 @@ def process_email(text,filename,intent):
 
     sender = client.models.generate_content(
         model="gemini-2.0-flash",
-        contents=f"Extract just the sender from the email and if there is no sender just say unknown\n {text}",
+        contents=f"Extract just the sender's name from the email and if there is no sender just say unknown\n {text}",
     )
     urgency = client.models.generate_content(
         model="gemini-2.0-flash",
