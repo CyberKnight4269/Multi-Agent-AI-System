@@ -16,6 +16,7 @@ def process_email(text,filename,intent):
         model="gemini-2.0-flash",
         contents=f"Classify the urgency of this email into by just saying High or Normal\n {text}",
     )
+    print(f"source: {filename}\nformat: Email\nIntent: {intent}\nAgent: EmailAgent\nSender: {sender.text.strip()}\nUrgency: {urgency.text.strip()}\n\n")
     memory_store.log({
         "source": filename,
         "format": "Email",

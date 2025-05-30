@@ -7,6 +7,7 @@ def process_json(payload,filename,intent):
         "valid": not missing,
         "missing_fields": missing,
     }
+    print(f"source: {filename}\nformat: JSON\nIntent: {intent}\nAgent: JsonAgent\n\n")
     memory_store.log({
         "source": filename,
         "format": "JSON",
